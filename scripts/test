@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export PREFIX=""
+if [ -d 'venv' ] ; then
+    export PREFIX="venv/bin/"
+fi
+
+export PYTHONPATH=faust-cassandra-weather-example
+export SIMPLE_SETTINGS=settings
+
+${PREFIX}pytest ${1-"./tests"}
+${PREFIX}black faust-cassandra-weather-example tests/ --check
+${PREFIX}flake8 faust-cassandra-weather-example tests/

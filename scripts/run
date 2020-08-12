@@ -1,0 +1,6 @@
+#!/bin/sh
+set -x
+
+export SIMPLE_SETTINGS=faust-cassandra-weather-example.settings
+
+PYTHONPATH=faust-cassandra-weather-example venv/bin/faust -A app worker --web-port=$WORKER_PORT
