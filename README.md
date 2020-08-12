@@ -1,11 +1,13 @@
 Faust Cassandra Weather Example
 ===============================
 
-Fause Cassandra Weather Example
+This project is meant to demonstrate the capabilities of Faust and aiocassandra.
 
+For getting started with your own project, I recommend checking out the Faust cookiecutter project worked on by Marcos Schroh:
+
+https://github.com/marcosschroh/cookiecutter-faust
 
 :License: MIT
-
 
 Installation
 ------------
@@ -121,7 +123,7 @@ The `Dockerfile` is based on  `python:3.7-slim`.
 Docker Compose
 --------------
 
-`docker-compose.yaml` includes `zookeepeer`, `kafka` and `schema-registry` based on `confluent-inc`.
+`docker-compose.yaml` includes `zookeeper` and `kafka` based on `confluent-inc`.
 For more information you can go to [confluentinc](https://docs.confluent.io/current/installation/docker/docs/index.html) and see the docker compose example [here](https://github.com/confluentinc/cp-docker-images/blob/master/examples/cp-all-in-one/docker-compose.yml#L23-L48)
 
 Useful ENVIRONMENT variables that you may change:
@@ -130,8 +132,8 @@ Useful ENVIRONMENT variables that you may change:
 |--------|--------------|---------|
 | WORKER_PORT | Worker port | `6066` |
 | KAFKA_BOOTSTRAP_SERVER | Kafka servers | `kafka://localhost:29092` |
-| KAFKA_BOOSTRAP_SERVER_NAME | Kafka server name| `kafka` |
-| KAFKA_BOOSTRAP_SERVER_PORT | Kafka server port | `29092` |
+| KAFKA_BOOTSTRAP_SERVER_NAME | Kafka server name| `kafka` |
+| KAFKA_BOOTSTRAP_SERVER_PORT | Kafka server port | `29092` |
 | SCHEMA_REGISTRY_SERVER | Schema registry server name | `schema-registry` |
 | SCHEMA_REGISTRY_SERVER_PORT | Schema registry server port | `8081` |
 | SCHEMA_REGISTRY_URL | Schema Registry Server url | `http://schema-registry:8081` |
