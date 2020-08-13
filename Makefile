@@ -41,12 +41,13 @@ remove-network:
 stop:
 	docker-compose stop
 
-kafka-cluster:
+start-infra:
 	docker-compose up
 
-stop-kafka-cluster: stop remove remove-network
+stop-infra: stop remove remove-network
 
 # Kafka related
+
 list-topics:
 	docker-compose exec kafka kafka-topics --list --zookeeper zookeeper:32181
 
@@ -57,8 +58,8 @@ create-topic:
 start-app:
 	./scripts/run
 
-send-page-view-event:
-	PYTHONPATH=faust-cassandra-weather-example venv/bin/faust -A app send page_views '${payload}'
+send-weather-event:
+	PYTHONPATH=faust-cassandra-weather-example venv/bin/faust -A app send weather '${payload}'
 
 list-agents:
 	PYTHONPATH=faust-cassandra-weather-example venv/bin/faust -A app agents
@@ -69,3 +70,6 @@ build:
 
 run:
 	docker run faust-cassandra-weather-example
+
+test:
+	./scripts/test

@@ -3,7 +3,7 @@ Faust Cassandra Weather Example
 
 This project is meant to demonstrate the capabilities of Faust and aiocassandra.
 
-For getting started with your own project, I recommend checking out the Faust cookiecutter project worked on by Marcos Schroh:
+For getting started with your own Faust project, I recommend also checking out the Faust cookiecutter project worked on by Marcos Schroh:
 
 https://github.com/marcosschroh/cookiecutter-faust
 
@@ -22,13 +22,26 @@ Usage
 ------
 
 If you do not have a cluster running locally you can use `docker-compose` to avoid several headaches.
-By default the `KAFKA_BOOTSTRAP_SERVER` is `kafka://localhost:29092`.
+By default:
+- `KAFKA_BOOTSTRAP_SERVER` is `kafka://localhost:29092`.
 
 ```bash
-make kafka-cluster
+make start-infra
 ```
 
-Then, start the `Faust application`:
+Wait for a moment for the whole infrastructure to spin up.
+
+Create Kafka Topics:
+```bash
+./scripts/create-topics
+```
+
+Create Cassandra Tables:
+```bash
+./scripts/create-tables
+```
+
+Then, start the example:
 
 ```bash
 make start-app
@@ -95,7 +108,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'page_views': {
+        'weather': {
             'handlers': ['console'],
             'level': 'INFO',
         },
@@ -106,14 +119,14 @@ LOGGING = {
 Basic Commands
 --------------
 
-* Start application: `make kafka-cluster`. This command start both the *Page Views* application
+* Start application: `make kafka-cluster`. Note: This command also starts the weather application.
 * Stop and remove containers: `make stop-kafka-cluster`
 * Install requirements: `make install`
 * Start Faust application: `make start-app`
 * List topics: `make list-topics`
-* Create topic: `make create-topic={topic-name}`
+* Create weather topic: `make create-topic topic-name="weather"`
 * List agents: `make list-agents`
-* Send events to page_view topic/agent: `make send-page-view-event payload='{"id": "foo", "user": "bar"}'`
+* Send events to weather topic/agent: `make send-weather-event payload='{"id": "c97a5c79-fb8d-4b07-9686-61ec62eb12d4", "occurred_at": 1597342944704, "lat": 12.0, "long": 45.0, "temperature_c": 25.0}'`
 
 Docker
 ------
@@ -134,12 +147,18 @@ Useful ENVIRONMENT variables that you may change:
 | KAFKA_BOOTSTRAP_SERVER | Kafka servers | `kafka://localhost:29092` |
 | KAFKA_BOOTSTRAP_SERVER_NAME | Kafka server name| `kafka` |
 | KAFKA_BOOTSTRAP_SERVER_PORT | Kafka server port | `29092` |
+| CASSANDRA_SERVER_NAME | Cassandra server name| `cassandra` |
+| CASSANDRA_SERVER_PORT | Cassandra server port | `9042` |
 | SCHEMA_REGISTRY_SERVER | Schema registry server name | `schema-registry` |
 | SCHEMA_REGISTRY_SERVER_PORT | Schema registry server port | `8081` |
 | SCHEMA_REGISTRY_URL | Schema Registry Server url | `http://schema-registry:8081` |
 
 Run tests
 ---------
+
+```sh
+make install-tests
+```
 
 ```sh
 ./scripts/test.sh

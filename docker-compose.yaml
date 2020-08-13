@@ -1,5 +1,9 @@
 version: '3'
 services:
+  cassandra:
+    ports:
+      - 9042:9042
+    image: cassandra:3.11
   zookeeper:
     image: "confluentinc/cp-zookeeper"
     hostname: zookeeper

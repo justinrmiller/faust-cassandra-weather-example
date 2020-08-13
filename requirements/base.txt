@@ -1,2 +1,5 @@
 faust
+
 simple-settings
+
+aiocassandra

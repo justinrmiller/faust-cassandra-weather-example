@@ -1,0 +1,6 @@
+#!/bin/sh
+
+make create-topic topic-name="weather-input"
+make create-topic topic-name="weather-accepted"
+make create-topic topic-name="weather-rejected"
+

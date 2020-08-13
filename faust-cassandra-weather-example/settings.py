@@ -10,7 +10,6 @@ SIMPLE_SETTINGS = {
 }
 
 KAFKA_BOOTSTRAP_SERVER = "kafka://localhost:29092"
-# SCHEMA_REGISTRY_URL = "http://schema-registry:8081"
 
 # Faust storage
 STORE_URI = "memory://"
@@ -21,7 +20,7 @@ LOGGING = dictConfig(
         "disable_existing_loggers": False,
         "formatters": {"default": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"}},
         "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler", "formatter": "default",}},
-        "loggers": {"page_views": {"handlers": ["console"], "level": "INFO"}},
+        "loggers": {"weather": {"handlers": ["console"], "level": "INFO"}},
     }
 )
 

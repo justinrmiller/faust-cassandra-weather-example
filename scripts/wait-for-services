@@ -10,7 +10,12 @@ done
 
 >&2 echo "Kafka is up"
 
+until nc -vz ${CASSANDRA_SERVER_NAME} ${CASSANDRA_PORT}; do
+  >&2 echo "Waiting for Cassandra to be ready... - sleeping"
+  sleep 2
+done
 
+>&2 echo "Cassandra is up"
 
 echo "Executing command ${cmd}"
 exec $cmd

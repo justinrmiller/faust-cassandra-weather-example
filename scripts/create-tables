@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Creating (if one does not exist) demo Keyspace"
+docker run -it --rm cassandra cqlsh host.docker.internal --execute "CREATE KEYSPACE IF NOT EXISTS demo WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+echo "Creating (if one does not exist) demo.weather Table"
+docker run -it --rm cassandra cqlsh host.docker.internal --execute "CREATE TABLE IF NOT EXISTS demo.weather (id uuid PRIMARY KEY, occurred_at varint, lat float, long float, temperature_c float);"
